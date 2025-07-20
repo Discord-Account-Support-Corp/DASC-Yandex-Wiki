@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Redirecting to Yandex Wiki...</title>
+  <title>Yandex Wiki PWA</title>
   <link rel="manifest" href="manifest.json" />
   <script src="sw-register.js" defer></script>
   <style>
@@ -14,17 +14,34 @@
       align-items: center;
       height: 100vh;
       text-align: center;
+      padding: 20px;
+    }
+    a {
+      color: #007bff;
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <div>
-    <p>Redirecting to <a href="https://wiki.yandex.com">Yandex Wiki</a>...</p>
-    <p>If you are not redirected automatically, <a href="https://wiki.yandex.com">click here</a>.</p>
+    <h1>Welcome to Yandex Wiki PWA</h1>
+    <p>You will be redirected to <strong>Yandex Wiki</strong> in <span id="timer">30</span> seconds.</p>
+    <p>If you're not redirected, <a href="https://wiki.yandex.com" target="_blank">click here</a>.</p>
+    <p>To install this app to your Home Screen, use your browser's menu (e.g., “Add to Home Screen” on mobile).</p>
   </div>
 
   <script>
-    window.location.href = "https://wiki.yandex.com";
+    const timerSpan = document.getElementById('timer');
+    let timeLeft = 30;
+
+    const countdown = setInterval(() => {
+      timeLeft--;
+      timerSpan.textContent = timeLeft;
+      if (timeLeft <= 0) {
+        clearInterval(countdown);
+        window.location.href = "https://wiki.yandex.com";
+      }
+    }, 1000);
   </script>
 </body>
 </html>
