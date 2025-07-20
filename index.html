@@ -18,43 +18,39 @@
       margin: 0;
       padding: 20px;
     }
-    a {
-      color: #007bff;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
     #timer {
       font-weight: bold;
-      font-size: 1.2em;
-      color: #cc0000;
+      font-size: 1.5em;
+      color: #c00;
     }
   </style>
 </head>
 <body>
   <div>
     <h1>📘 Yandex Wiki PWA</h1>
-    <p>This app will redirect you to <strong>Yandex Wiki</strong> in <span id="timer">60</span> seconds.</p>
-    <p>If you're not redirected, <a href="https://wiki.yandex.com" target="_blank">click here</a>.</p>
-    <p>To install this app, tap the browser menu and choose <em>“Add to Home Screen”</em>.</p>
+    <p>You’ll be redirected to <strong>Yandex Wiki</strong> in <span id="timer">60</span> seconds.</p>
+    <p>If not redirected, <a href="https://wiki.yandex.com" target="_blank">click here</a>.</p>
+    <p>Tap “Add to Home Screen” in your browser menu to install.</p>
   </div>
 
   <script>
-    window.onload = function () {
-      const timerSpan = document.getElementById('timer');
+    document.addEventListener("DOMContentLoaded", function () {
       let timeLeft = 60;
+      const timer = document.getElementById("timer");
 
-      const countdown = setInterval(() => {
+      const interval = setInterval(() => {
         timeLeft--;
-        timerSpan.textContent = timeLeft;
+        timer.textContent = timeLeft;
 
         if (timeLeft <= 0) {
-          clearInterval(countdown);
-          window.location.href = "https://wiki.yandex.com";
+          clearInterval(interval);
+          // Delay redirect inside setTimeout to ensure it's controlled
+          setTimeout(() => {
+            window.location.href = "https://wiki.yandex.com";
+          }, 200); // slight buffer to ensure everything displays first
         }
       }, 1000);
-    };
+    });
   </script>
 </body>
 </html>
