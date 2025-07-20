@@ -9,15 +9,49 @@
   <style>
     body, html {
       margin: 0; padding: 0; height: 100%; overflow: hidden;
+      font-family: sans-serif;
     }
     iframe {
       border: none;
       width: 100vw;
       height: 100vh;
+      display: block;
+    }
+    .fallback {
+      display: none;
+      padding: 20px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <iframe src="https://wiki.yandex.com/?skipPromo=1&utm_referrer=https%253A%252F%252Fwiki-yandex-com.translate.goog%252F"></iframe>
+  <iframe id="wikiFrame" src="https://wiki.yandex.com/?skipPromo=1&utm_referrer=https%253A%252F%252Fwiki-yandex-com.translate.goog%252F" loading="lazy"></iframe>
+
+  <div class="fallback" id="fallbackMessage">
+    <h2>Yandex Wiki couldn’t be embedded.</h2>
+    <p>If you’re not redirected automatically, <a href="https://wiki.yandex.com" target="_blank">click here</a>.</p>
+  </div>
+
+  <script>
+    const iframe = document.getElementById('wikiFrame');
+    const fallback = document.getElementById('fallbackMessage');
+
+    // Detect iframe load failure
+    iframe.onerror = function () {
+      fallback.style.display = 'block';
+      iframe.style.display = 'none';
+      setTimeout(() => {
+        window.location.href = "https://wiki.yandex.com";
+      }, 5000); // Redirect after 5 seconds
+    };
+
+    // Additional fallback: if iframe doesn't load in 10 seconds, assume failure
+    setTimeout(() => {
+      if (!iframe.contentWindow || !iframe.contentDocument || iframe.contentDocument.readyState === 'uninitialized') {
+        fallback.style.display = 'block';
+        iframe.style.display = 'none';
+      }
+    }, 10000);
+  </script>
 </body>
 </html>
