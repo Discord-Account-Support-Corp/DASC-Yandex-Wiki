@@ -41,17 +41,20 @@
   </div>
 
   <script>
-    const timerSpan = document.getElementById('timer');
-    let timeLeft = 60;
+    window.onload = function () {
+      const timerSpan = document.getElementById('timer');
+      let timeLeft = 60;
 
-    const countdown = setInterval(() => {
-      timeLeft--;
-      timerSpan.textContent = timeLeft;
-      if (timeLeft <= 0) {
-        clearInterval(countdown);
-        window.location.href = "https://wiki.yandex.com";
-      }
-    }, 1000);
+      const countdown = setInterval(() => {
+        timeLeft--;
+        timerSpan.textContent = timeLeft;
+
+        if (timeLeft <= 0) {
+          clearInterval(countdown);
+          window.location.href = "https://wiki.yandex.com";
+        }
+      }, 1000);
+    };
   </script>
 </body>
 </html>
