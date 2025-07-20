@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yandex Wiki PWA</title>
+  <link rel="manifest" href="manifest.json" />
+  <script src="sw-register.js" defer></script>
+  <style>
+    body, html {
+      margin: 0; padding: 0; height: 100%; overflow: hidden;
+    }
+    iframe {
+      border: none;
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <iframe src="https://wiki.yandex.com/?skipPromo=1&utm_referrer=https%253A%252F%252Fwiki-yandex-com.translate.goog%252F"></iframe>
+</body>
+</html>
